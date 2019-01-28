@@ -1,36 +1,13 @@
 import csv
 import json
 import pickle
-
 import numpy as np
-# def get_txt_data(filename):
-#     data = open(filename).read()
-#     return data
-#
-# get_txt_data("input/train.csv")
-
-
-# with open("input/embeddings/paragram_300_sl999/paragram_300_sl999.txt", encoding="utf8", errors="ignore") as f:
-#     for line in f:
-#         print(line)
-
-# all_embs=[1,2,3,5,76,7]
-# emb_mean, emb_std = all_embs.mean(), all_embs.std()
-# print(emb_mean)
-# print(emb_std)
-
-#"""保存词向量矩阵"""
-# with open('model/tfidf', 'wb') as fp:
-#     pickle.dump(vec_tfidf, fp)
-
-# with open('model/glove_embeding_marix', 'rb') as fp:
-#     embeding_marix = pickle.load(fp)
-# print(embeding_marix)
 import pandas as pd
 from sklearn.cross_validation import train_test_split
 
-"""划分数据集：训练集和测试集"""
-
+"""
+python将大csv文件划分成小csv文件做训练集和测试集及对应label文件
+"""
 
 def read_data(test_data='input/train.csv', n=0, label=1):
     '''
@@ -53,7 +30,6 @@ def read_data(test_data='input/train.csv', n=0, label=1):
             one_list = [o for o in one_line[n:]]
             x_list.append(one_list)
     return x_list, y_list
-
 
 def split_data(data_list, y_list, ratio=0.30):#70%训练集，30%测试集: 914285,391837
     '''
@@ -86,34 +62,5 @@ def split_data(data_list, y_list, ratio=0.30):#70%训练集，30%测试集: 9142
 if __name__ == '__main__':
     """获取大文件的数据"""
     x_list, y_list=read_data()
-
-    # print(len(x_list))#1306122
-    #id_list=x_list[0:-1][0]
-    # id_list=[]
-    # for one_line in x_list[0:]:#把一个双重list提取第一项出来要遍历
-    #     id_list.append(one_line[0])
-    # print(id_list)
-    # print(len(id_list))
-
-    #print(y_list)
     """划分为训练集和测试集及label文件"""
     split_data(x_list,y_list)
-
-    # for i in range(len(x_list)):
-    #     print(x_list[i][0])
-    #     print(x_list[i][1])
-    # train=pandas.read_csv("dca.csv")
-    # print(train["question_text"])
-    # test=pd.read_csv('acd.csv')
-    # print(test)
-
-    # train=pd.read_csv("input/train.csv")
-    # # y_train = train["target"].values
-    # # print(y_train)
-    #
-
-    X=pd.read_csv('input/sub_test_x.csv')#X为dataFrame数据
-    for j in {8,16,26,42,54,72,96,101,109}:
-          print(X.ix[j])
-
-
